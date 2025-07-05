@@ -1,0 +1,130 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             String   @id @default(uuid())
+  first_name     String
+  last_name      String
+  email          String   @unique
+  password       String
+  wallet_address String?  @unique
+  verified       Boolean  @default(false)
+  agreed_version String   @default("v1")
+  agreed_at      DateTime @default(now())
+  created_at     DateTime @default(now())
+
+  // Relations
+  otps           Otp[]
+  refresh_tokens RefreshToken[]
+  // transactions     Transaction[]
+  switch_logs    SwitchLog[]
+  treasury       Treasury?
+
+  @@map("users")
+}
+
+model Otp {
+  id         String   @id @default(uuid())
+  user_id    String
+  user       User     @relation(fields: [user_id], references: [id])
+  token      Int
+  expires_at DateTime
+
+  @@unique([user_id, token])
+  @@map("otps")
+}
+
+model Treasury {
+  id      String @id @default(uuid())
+  user_id String @unique
+  user    User   @relation(fields: [user_id], references: [id])
+  balance Float  @default(0)
+
+  transactions Transaction[]
+
+  @@map("treasury")
+}
+
+model RefreshToken {
+  id         String   @id @default(uuid())
+  user_id    String
+  user       User     @relation(fields: [user_id], references: [id])
+  device_id  String
+  token      String   @unique
+  expires_at DateTime
+
+  @@unique([user_id, device_id])
+  @@map("refresh_tokens")
+}
+
+// model Transaction {
+//   id             String    @id @default(uuid())
+//   user_id        String
+//   user           User      @relation(fields: [user_id], references: [id])
+//   amount         Float
+//   token          String
+//   tx_hash        String    @unique
+//   status         String    @default("PENDING")
+//   created_at     DateTime  @default(now())
+
+//   @@map("transactions")
+// }
+
+model SwitchLog {
+  id          String   @id @default(uuid())
+  user_id     String
+  user        User     @relation(fields: [user_id], references: [id])
+  from_isp    String
+  to_isp      String
+  reason      String
+  switched_at DateTime @default(now())
+
+  @@map("switch_logs")
+}
+
+model Transaction {
+  id                    String          @id @default(uuid())
+  treasury_id           String
+  amount                Float
+  type                  TransactionType
+  isp                   String?
+  data_plan_id          String?
+  data_plan_description String?
+  description           String?
+  created_at            DateTime        @default(now())
+
+  treasury Treasury @relation(fields: [treasury_id], references: [id])
+
+  @@map("transactions")
+}
+
+model IspPurchase {
+  id              String   @id @default(uuid())
+  user_id         String
+  phone_number    String
+  data_or_airtime String // 'data' or 'airtime'
+  amount          Float
+  plan_id         String? // nullable if airtime
+  isp             String // 'mtn', 'airtel', etc.
+  created_at      DateTime @default(now())
+
+  @@map("isp_purchases")
+}
+
+enum TransactionType {
+  FUND
+  SPEND
+}
