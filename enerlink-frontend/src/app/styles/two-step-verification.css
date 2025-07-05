@@ -1,0 +1,357 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.two-step-container {
+  min-height: 100vh;
+  background-color: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  width: 100vw;
+  max-width: 100%;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Header Styles */
+.header {
+  padding: 16px 20px;
+  padding-top: 50px; /* Account for status bar */
+}
+
+.back-button {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #666666;
+  padding: 8px;
+  width: fit-content;
+}
+
+.back-icon {
+  width: 24px;
+  height: 24px;
+  color: #666666;
+}
+
+/* Main Content */
+.main-content {
+  padding: 0 20px;
+  padding-bottom: 40px;
+}
+
+.page-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 20px 0 24px 0;
+  line-height: 1.2;
+}
+
+/* Instructions Section */
+.instructions-section {
+  margin-bottom: 40px;
+}
+
+.instructions-text {
+  font-size: 16px;
+  color: #666666;
+  line-height: 1.5;
+  margin: 0;
+  font-weight: 400;
+}
+
+/* Form Styles */
+.verification-form {
+  width: 100%;
+}
+
+.fields-row {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 60px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.input-group {
+  flex: 1;
+}
+
+.country-group {
+  flex: 0.8;
+}
+
+.mobile-group {
+  flex: 1.2;
+}
+
+.input-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: #1a1a1a;
+  margin-bottom: 8px;
+}
+
+/* Select Styles */
+.select-container {
+  position: relative;
+}
+
+.select-input {
+  width: 100%;
+  padding: 12px 40px 12px 16px;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 16px;
+  background-color: #ffffff;
+  transition: border-color 0.2s ease;
+  box-sizing: border-box;
+  appearance: none;
+  cursor: pointer;
+}
+
+.select-input:focus {
+  outline: none;
+  border-color: #0a738d;
+}
+
+.select-input option {
+  padding: 8px;
+}
+
+.select-arrow {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #666666;
+}
+
+.arrow-icon {
+  width: 16px;
+  height: 16px;
+}
+
+/* Mobile Input Styles */
+.mobile-input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.country-code {
+  position: absolute;
+  left: 16px;
+  font-size: 16px;
+  color: #666666;
+  font-weight: 500;
+  z-index: 1;
+}
+
+.text-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 16px;
+  background-color: #ffffff;
+  transition: border-color 0.2s ease;
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+.mobile-input.with-code {
+  padding-left: 60px;
+}
+
+.text-input:focus {
+  outline: none;
+  border-color: #0a738d;
+}
+
+.text-input::placeholder {
+  color: #999999;
+}
+
+/* Error state for inputs */
+.select-input.error,
+.text-input.error {
+  border-color: #e53e3e;
+  background-color: #fef5f5;
+}
+
+.select-input.error:focus,
+.text-input.error:focus {
+  border-color: #e53e3e;
+  box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.1);
+}
+
+/* Error Message Styles */
+.error-message {
+  font-size: 12px;
+  color: #e53e3e;
+  margin: 4px 0 0 0;
+  line-height: 1.4;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.error-message::before {
+  content: "⚠";
+  font-size: 12px;
+}
+
+/* Submit Button */
+.submit-container {
+  margin-top: 40px;
+}
+
+.send-code-button {
+  width: 100%;
+  background-color: #0a738d;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  padding: 16px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.send-code-button:hover {
+  background-color: #085a6b;
+}
+
+.send-code-button:active {
+  background-color: #064d5a;
+}
+
+.send-code-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+  .fields-row {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .country-group,
+  .mobile-group {
+    flex: none;
+  }
+
+  .main-content {
+    padding: 0 16px;
+    padding-bottom: 40px;
+  }
+
+  .header {
+    padding: 16px;
+    padding-top: 50px;
+  }
+
+  .page-title {
+    font-size: 22px;
+  }
+
+  .instructions-text {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .select-input,
+  .text-input {
+    padding: 14px 16px;
+    font-size: 15px;
+  }
+
+  .mobile-input.with-code {
+    padding-left: 55px;
+  }
+
+  .country-code {
+    font-size: 15px;
+  }
+
+  .send-code-button {
+    padding: 14px 20px;
+    font-size: 15px;
+  }
+}
+
+/* Focus states for accessibility */
+.back-button:focus,
+.select-input:focus,
+.text-input:focus,
+.send-code-button:focus {
+  outline: 2px solid #0a738d;
+  outline-offset: 2px;
+}
+
+.select-input.error:focus,
+.text-input.error:focus {
+  outline-color: #e53e3e;
+}
+
+/* Loading state for button */
+.send-code-button.loading {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.send-code-button.loading::after {
+  content: "";
+  width: 16px;
+  height: 16px;
+  margin-left: 8px;
+  border: 2px solid transparent;
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  display: inline-block;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .header {
+    padding: 40px 12px 20px 12px;
+  }
+
+  .main-content {
+    padding: 0 12px;
+    padding-bottom: 40px;
+  }
+
+  .mobile-input.with-code {
+    padding-left: 50px;
+  }
+
+  .text-input {
+    font-size: 14px;
+    padding: 10px 12px;
+  }
+}

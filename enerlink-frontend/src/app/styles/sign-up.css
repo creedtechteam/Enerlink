@@ -1,0 +1,384 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.create-account-container {
+  min-height: 100vh;
+  background-color: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  width: 100vw;
+  max-width: 100%;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Header Styles */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  padding-top: 50px; /* Account for status bar */
+}
+
+.back-button {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #666666;
+  padding: 8px;
+}
+
+.back-icon {
+  width: 24px;
+  height: 24px;
+  color: #666666;
+}
+
+.signin-link {
+  color: #0a738d;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.signin-link:hover {
+  text-decoration: underline;
+}
+
+/* Main Content */
+.main-content {
+  padding: 0 20px;
+  padding-bottom: 40px;
+}
+
+.page-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 20px 0 8px 0;
+  line-height: 1.2;
+}
+
+.subtitle-banner {
+  margin-bottom: 32px;
+}
+
+.subtitle-text {
+  color: #666666;
+  font-size: 14px;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Form Styles */
+.account-form {
+  width: 100%;
+}
+
+.form-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 24px 0;
+}
+
+.input-group {
+  margin-bottom: 20px;
+}
+
+.input-group.half-width {
+  flex: 1;
+  min-width: 0;
+}
+
+.name-fields-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.input-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: #1a1a1a;
+  margin-bottom: 8px;
+}
+
+.text-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 16px;
+  background-color: #ffffff;
+  transition: border-color 0.2s ease;
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+.text-input:focus {
+  outline: none;
+  border-color: #0a738d;
+}
+
+.text-input::placeholder {
+  color: #999999;
+}
+
+/* Error state for inputs */
+.text-input.error {
+  border-color: #e53e3e;
+  background-color: #fef5f5;
+}
+
+.text-input.error:focus {
+  border-color: #e53e3e;
+  box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.1);
+}
+
+/* Password Field */
+.password-input-container {
+  position: relative;
+}
+
+.password-input {
+  padding-right: 50px;
+}
+
+.password-toggle-btn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #666666;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.password-toggle-btn:hover {
+  color: #0a738d;
+}
+
+.password-strength {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.strength-bar {
+  flex: 1;
+  height: 4px;
+  background-color: #e0e0e0;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.strength-fill {
+  height: 100%;
+  width: 80%;
+  background-color: #4caf50;
+  border-radius: 2px;
+}
+
+.strength-text {
+  font-size: 12px;
+  color: #4caf50;
+  font-weight: 500;
+}
+
+/* Checkbox Styles */
+.checkbox-group {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin: 24px 0;
+}
+
+.checkbox-container {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.checkbox-input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.checkbox-label {
+  cursor: pointer;
+}
+
+.custom-checkbox {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #0a738d;
+  border-radius: 4px;
+  background-color: #0a738d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.checkbox-input:not(:checked) + .checkbox-label .custom-checkbox {
+  background-color: transparent;
+}
+
+.checkmark {
+  width: 14px;
+  height: 14px;
+}
+
+.terms-text-container {
+  flex: 1;
+}
+
+.terms-text {
+  font-size: 13px;
+  color: #0a738d;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Error Message Styles */
+.error-message {
+  font-size: 12px;
+  color: #e53e3e;
+  margin: 4px 0 0 0;
+  line-height: 1.4;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.error-message::before {
+  content: "⚠";
+  font-size: 12px;
+}
+
+/* Error state for checkbox */
+.custom-checkbox.error {
+  border-color: #e53e3e;
+  animation: shake 0.3s ease-in-out;
+}
+
+.checkbox-input:not(:checked) + .checkbox-label .custom-checkbox.error {
+  background-color: transparent;
+  border-color: #e53e3e;
+}
+
+/* Shake animation for errors */
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-4px);
+  }
+  75% {
+    transform: translateX(4px);
+  }
+}
+
+/* Submit Button */
+.submit-container {
+  margin-top: 32px;
+}
+
+.proceed-button {
+  width: 100%;
+  background-color: #0a738d;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  padding: 16px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.proceed-button:hover {
+  background-color: #085a6b;
+}
+
+.proceed-button:active {
+  background-color: #064d5a;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .name-fields-row {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .input-group.half-width {
+    flex: none;
+  }
+
+  .main-content {
+    padding: 0 16px;
+    padding-bottom: 40px;
+  }
+
+  .header {
+    padding: 16px;
+    padding-top: 50px;
+  }
+
+  .error-message {
+    font-size: 11px;
+  }
+}
+
+/* Focus states for accessibility */
+.text-input:focus,
+.checkbox-input:focus + .checkbox-label .custom-checkbox {
+  outline: 2px solid #0a738d;
+  outline-offset: 2px;
+}
+
+.text-input.error:focus {
+  outline-color: #e53e3e;
+}
+
+@media screen and (max-width: 360px) {
+  .header {
+    padding: 40px 12px 20px 12px;
+  }
+
+  .main-content {
+    padding: 0 12px;
+    padding-bottom: 40px;
+  }
+
+  .name-fields-row {
+    gap: 8px;
+  }
+
+  .text-input {
+    font-size: 14px;
+    padding: 10px 12px;
+  }
+}

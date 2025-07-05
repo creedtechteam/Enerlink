@@ -1,0 +1,242 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.verify-email-container {
+  min-height: 100vh;
+  background-color: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  max-width: 100%;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Header Styles */
+.header {
+  padding: 16px 20px;
+  padding-top: 50px; /* Account for status bar */
+}
+
+.back-button {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #666666;
+  padding: 8px;
+  width: fit-content;
+}
+
+.back-icon {
+  width: 24px;
+  height: 24px;
+  color: #666666;
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 0 20px;
+  padding-bottom: 40px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Illustration Section */
+.illustration-section {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  margin-bottom: 40px;
+}
+
+.illustration-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.verification-image {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Instructions Section */
+.instructions-section {
+  margin-bottom: 40px;
+}
+
+.instructions-container {
+  text-align: center;
+  padding: 0 10px;
+}
+
+.instructions-text {
+  font-size: 16px;
+  color: #1a1a1a;
+  line-height: 1.5;
+  margin: 0;
+  font-weight: 400;
+}
+
+.email-highlight {
+  color: #0a738d;
+  font-weight: 500;
+}
+
+/* Buttons Section */
+.buttons-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.resend-button {
+  width: 100%;
+  background-color: #6b7280;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  padding: 16px 24px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.resend-button:hover {
+  background-color: #4b5563;
+}
+
+.resend-button:active {
+  background-color: #374151;
+}
+
+.continue-link {
+  text-decoration: none;
+  width: 100%;
+}
+
+.continue-button {
+  width: 100%;
+  background-color: #0a738d;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  padding: 16px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.continue-button:hover {
+  background-color: #085a6b;
+}
+
+.continue-button:active {
+  background-color: #064d5a;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .main-content {
+    padding: 0 16px;
+    padding-bottom: 40px;
+  }
+
+  .header {
+    padding: 16px;
+    padding-top: 50px;
+  }
+
+  .illustration-section {
+    min-height: 250px;
+    margin-bottom: 30px;
+  }
+
+  .verification-image {
+    width: 200px;
+    height: 200px;
+  }
+
+  .instructions-text {
+    font-size: 15px;
+  }
+
+  .buttons-section {
+    gap: 12px;
+  }
+
+  .resend-button,
+  .continue-button {
+    padding: 14px 20px;
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 360px) {
+  .verification-image {
+    width: 180px;
+    height: 180px;
+  }
+
+  .instructions-text {
+    font-size: 14px;
+  }
+
+  .header {
+    padding: 40px 12px 20px 12px;
+  }
+
+  .main-content {
+    padding: 0 12px;
+    padding-bottom: 40px;
+  }
+
+  .instructions-text {
+    font-size: 13px;
+  }
+}
+
+/* Focus states for accessibility */
+.back-button:focus,
+.resend-button:focus,
+.continue-button:focus {
+  outline: 2px solid #0a738d;
+  outline-offset: 2px;
+}
+
+/* Loading state for buttons (optional) */
+.resend-button:disabled,
+.continue-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.resend-button:disabled:hover,
+.continue-button:disabled:hover {
+  background-color: #6b7280;
+}
+
+.continue-button:disabled:hover {
+  background-color: #0a738d;
+}
