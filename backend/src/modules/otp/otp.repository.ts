@@ -1,4 +1,4 @@
-import { Otp } from './../../../generated/prisma';
+import { Otp } from '../../../generated/prisma';
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../database/prisma.service';
 
