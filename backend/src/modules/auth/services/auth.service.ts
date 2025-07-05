@@ -41,6 +41,22 @@ export class AuthService {
     return { message: 'Check your email for a verification code' };
   }
 
+  async addWalletAddress(user_id: string, address: string) {
+    return this.userRepo.setWalletAddress(user_id, address);
+  }
+
+  async signInWithWalletAddress(wallet_address: string) {
+    const user = await this.userRepo.findByWallet(wallet_address);
+    if (!user) throw new UnauthorizedException('Invalid credentials');
+
+    const access = await this.accessTokenService.generate(user);
+    const { token: refresh, device_id } = await this.refreshTokenService.create(
+      user.id,
+    );
+
+    return { access_token: access, refresh_token: refresh, device_id };
+  }
+
   async signIn(email: string, password: string) {
     const user = await this.userRepo.findByEmail(email);
     if (!user || !user.password)

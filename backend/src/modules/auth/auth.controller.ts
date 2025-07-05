@@ -39,6 +39,22 @@ export class AuthController {
     return this.authService.signIn(dto.email, dto.password);
   }
 
+  @Post('signin-with-wallet-address')
+  @ApiOperation({ summary: 'Authenticate user with wallet address' })
+  @ApiOkResponse({ type: SignInResponse })
+  signInWithWalletAddress(@Body('wallet_address') wallet_address: string) {
+    return this.authService.signInWithWalletAddress(wallet_address);
+  }
+
+  @Post('add-wallet-address')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'Add wallet address to user' })
+  @ApiOkResponse({ type: MessageResponse })
+  addWalletAddress(@Req() req: AuthRequest, @Body('address') address: string) {
+    return this.authService.addWalletAddress(req.user.user_id, address);
+  }
+
   @Post('forgot-password')
   @ApiOperation({ summary: 'Send password reset instructions' })
   @ApiOkResponse({ description: 'OTP sent if email exists' })
