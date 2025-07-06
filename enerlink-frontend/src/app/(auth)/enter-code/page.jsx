@@ -5,6 +5,7 @@ import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { useSearchParams } from "next/navigation"
 import "../../styles/enter-code.css"
+import axios from "@/lib/axios"
 
 export default function EnterVerificationCode() {
   const [verificationCode, setVerificationCode] = useState("")
@@ -60,26 +61,49 @@ export default function EnterVerificationCode() {
     }))
   }
 
-  const handleProceed = (e) => {
+  
+  const handleProceed = async (e) => {
     e.preventDefault()
 
-    // Validate verification code
     const codeError = validateVerificationCode(verificationCode)
-
     if (codeError) {
       setErrors({ verificationCode: codeError })
       return
     }
 
-    console.log("Verification code:", verificationCode)
-    // After email verification is complete, redirect to sign in
-    router.push("/signin")
+    const userId = localStorage.getItem("user_id")
+    if (!userId) return alert("Missing user ID. Please sign up again.")
+
+    try {
+      const payload = {
+        user_id: userId,
+        token: parseInt(verificationCode, 10),
+      }
+
+      const res = await axios.post("/auth/verify-email", payload)
+
+      alert("Email verified successfully! You can now sign in.")
+      router.push("/signin")
+    } catch (err) {
+      console.error(err)
+      alert("Verification failed. Please try again.")
+    }
   }
 
-  const handleResend = () => {
-    console.log("Resend verification code")
-    // Add resend logic here later
+
+ const handleResend = async () => {
+  const userId = localStorage.getItem("user_id")
+  if (!userId) return alert("User ID missing")
+
+  try {
+    const res = await axios.post("/auth/resend-verification", { user_id: userId })
+    alert("Verification code resent successfully!")
+    console.log("Resend response:", res.data)
+  } catch (err) {
+    console.error(err)
+    alert("Failed to resend verification code")
   }
+}
 
   return (
     <div className="enter-code-container">

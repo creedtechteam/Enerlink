@@ -20,11 +20,8 @@ export default function EmailVerificationSetup() {
     }))
   }
 
-  const handleSendCode = (e) => {
-    e.preventDefault()
-    console.log("Email verification setup:", formData)
-    // Add send code logic here later
-    router.push("/enter-2fa-code")
+  const handleSendCode = () => {
+    router.push("/enter-code")
   }
 
   return (

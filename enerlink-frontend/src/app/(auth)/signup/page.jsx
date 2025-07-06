@@ -4,6 +4,7 @@ import Link from "next/link"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import "../../styles/sign-up.css"
+import axios from "@/lib/axios"
 
 export default function CreateAccount() {
   const [formData, setFormData] = useState({
@@ -105,36 +106,49 @@ export default function CreateAccount() {
     }))
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
+  const handleSubmit = async (e) => {
+    console.log("I'm getting called")
+  e.preventDefault()
 
-    // Validate all fields
-    const newErrors = {
-      firstName: validateFirstName(formData.firstName),
-      otherNames: validateOtherNames(formData.otherNames),
-      email: validateEmail(formData.email),
-      password: validatePassword(formData.password),
-      agreeToTerms: validateTerms(formData.agreeToTerms),
-    }
-
-    setErrors(newErrors)
-
-    // Check if there are any errors
-    const hasErrors = Object.values(newErrors).some((error) => error !== "")
-
-    if (hasErrors) {
-      return // Stop form submission
-    }
-
-    // Store email in localStorage for the verification page
-    localStorage.setItem("userEmail", formData.email)
-
-    // If no errors, proceed with submission
-    console.log("Form submitted:", formData)
-
-    // Navigate with email as URL parameter as backup
-    router.push(`/verify-email?email=${encodeURIComponent(formData.email)}`)
+  // Validation
+  const newErrors = {
+    firstName: validateFirstName(formData.firstName),
+    otherNames: validateOtherNames(formData.otherNames),
+    email: validateEmail(formData.email),
+    password: validatePassword(formData.password),
+    agreeToTerms: validateTerms(formData.agreeToTerms),
   }
+
+  setErrors(newErrors)
+
+  if (Object.values(newErrors).some((error) => error)) return
+
+  const payload = {
+    first_name: formData.firstName,
+    last_name: formData.otherNames,
+    email: formData.email,
+    password: formData.password,
+  }
+
+  try {
+    const res = await axios.post("/auth/signup", payload)
+
+    const { access_token, refresh_token, user_id, device_id } = res.data
+
+    // Save tokens and userId (for later)
+    localStorage.setItem("access_token", access_token)
+    localStorage.setItem("refresh_token", refresh_token)
+    localStorage.setItem("user_id", user_id)
+    localStorage.setItem("device_id", device_id)
+    localStorage.setItem("userEmail", formData.email) // fallback
+
+    router.push(`/verify-email?email=${encodeURIComponent(formData.email)}`)
+  } catch (err) {
+    const message = err.response?.data?.message || "Something went wrong"
+    alert(message) // or use toast
+    console.error(err)
+  }
+}
 
   return (
     <div className="create-account-container">
