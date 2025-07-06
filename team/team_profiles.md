@@ -38,8 +38,8 @@ Meet the EnerLink Team — builders, thinkers, and doers working to unlock decen
 
 ###  Defi D'Boss  
 **Role:** Lead Developer  
-**X:** [@defiboss](https://x.com/defiboss)  
-**Discord:** DBoss#3003  
+**X:** [@samdboss](https://x.com/samdboss_)  
+**Discord:** @dbossdefi 
 **LinkedIn:** 
 
 ---
