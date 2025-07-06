@@ -6,8 +6,11 @@ Meet the EnerLink Team — builders, thinkers, and doers working to unlock decen
 
 ###  Ola Cryptonite  
 **Role:** Visionary Leader  
+
 **X:** [@ola_cryptonite](https://x.com/ola_cryptonite)
+
 **Discord:** @ola_cryptonite
+
 **LinkedIn:** https://www.linkedin.com/in/ola-cryptonite-129082273
 
 ---
