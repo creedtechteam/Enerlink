@@ -1,15 +1,15 @@
-#  EnerLink
+# EnerLink
 
-> Decentralized Smart ISP Switching + Unified Payment Gateway  
-> Built on Solana. Designed for Africa. Powered by Web3.
-
+**Decentralized Smart ISP Switching + Unified Payment Gateway**  
+*Built on Solana. Designed for Africa. Powered by Web3.*
 ---
 
 ##  Overview
 
-EnerLink is a decentralized, smart-switching internet service layer that automatically connects users to the best-performing ISP (MTN or Airtel) based on real-time signal strength — without SIM swaps.
+EnerLink is a decentralized, smart-switching internet service layer that automatically connects users to the best-performing ISP (MTN or Airtel) based on real-time signal strength — with **no need for physical SIM swaps**.
 
-With one blockchain-based payment, users unlock seamless access to multiple ISPs through an intelligent, censorship-resistant platform hosted on IPFS and accessed via ENS.
+With a single blockchain-based payment, users unlock seamless access to multiple ISPs through a censorship-resistant platform hosted on IPFS and accessed via ENS.
+
 
 ---
 
@@ -23,18 +23,19 @@ With one blockchain-based payment, users unlock seamless access to multiple ISPs
 
 ##  Problem and Opportunity 
 
-In many African markets users juggle through multiple SIM cards and unreliable data plans just to stay online. This results in:
+In many African markets users juggle multiple SIM cards and unreliable data plans just to stay connected. This leads to:
 - Manual SIM switching 
-- Poor user experience during signal outage 
-- Wasted data and increased costs 
+- Frequent service interuptions 
+- Wasted data and rising costs 
 
-Over 50% of users in target regions lacks access to seamless, failover-ready connectivity.
+> Over **50% of users** in target regions lack seamless, failover-ready Internet access.
 
 ---
 
 ##  Solution overview: EnerLink 
 
-EnerLink is a decentralized smart ISP switching protocol that: 
+EnerLink solves this with a decentralized connectivity layer that:
+
 - Automatically connects users to the strongest local network (e.g.,MTN vs. AIRTEL)
 - Enables tokenized, pay-per-KB billing via Solana smart contracts
 - Hosts the frontend on IPFS and resolves with ENF for censorship resistance. 
@@ -43,7 +44,11 @@ EnerLink is a decentralized smart ISP switching protocol that:
 
 ##  Prototype Highlights 
 
-###  Smart ISP switching Engine 
+- **Smart ISP Switching Engine**
+- **Tokenized Bandwidth Billing**
+- **IPFS + ENS Frontend Access**
+- **Data Vaults and Monitoring Bots**
+
 
 ---
 
