@@ -103,7 +103,7 @@ These APIs power the switching bot decisions and on-screen visual feedback.
 
 ##  Contact
 
-Questions or collaborations: creedtechgroup@gmail.com  
+Questions or collaborations: Enerlink088@gmail.com
 ENS: `enerlinklab.eth`
 
 ---
