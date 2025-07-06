@@ -94,7 +94,7 @@ export class AuthService {
   async verifyEmail(user_id: string, token: number) {
     await this.otpService.verify(user_id, token);
     const user = await this.userRepo.setVerified(user_id);
-    this.events.emit('user.verified', user);
+    this.events.emit('user.verified', { user: user });
   }
 
   async resendVerifEmail(user_id: string) {
