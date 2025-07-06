@@ -59,7 +59,7 @@ export default function EnterTwoStepCode() {
 
     console.log("Two-step verification code:", verificationCode)
     // Add verification logic here later
-    // router.push("/dashboard")
+    // router.push("/home")
   }
 
   const handleResend = () => {

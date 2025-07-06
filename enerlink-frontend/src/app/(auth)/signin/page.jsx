@@ -4,6 +4,7 @@ import Link from "next/link"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import "../../styles/signin.css"
+import axios from "@/lib/axios"
 
 export default function SignIn() {
   const [showPassword, setShowPassword] = useState(false)
@@ -22,10 +23,11 @@ export default function SignIn() {
 
   // Validation functions
   const validateUsername = (value) => {
-    if (!value.trim()) return "Username or full name is required"
-    if (value.trim().length < 2) return "Username must be at least 2 characters"
-    return ""
-  }
+  if (!value.trim()) return "Email is required"
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  if (!emailRegex.test(value)) return "Enter a valid email"
+  return ""
+}
 
   const validatePassword = (value) => {
     if (!value) return "Password is required"
@@ -79,43 +81,40 @@ export default function SignIn() {
     }))
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
+  const handleSubmit = async (e) => {
+  e.preventDefault()
 
-    // Validate all fields
-    const newErrors = {
-      username: validateUsername(formData.username),
-      password: validatePassword(formData.password),
-      rememberMe: validateRememberMe(formData.rememberMe),
-    }
-
-    setErrors(newErrors)
-
-    // Check if there are any errors
-    const hasErrors = Object.values(newErrors).some((error) => error !== "")
-
-    if (hasErrors) {
-      return // Stop form submission
-    }
-
-    console.log("Sign in form submitted:", formData)
-
-    // Check if this is first-time login (after signup)
-    // For now, we'll assume it's first-time and go to 2FA setup
-    // In real implementation, this would check user's 2FA status
-    const isFirstTimeLogin = true // This would come from your backend/state
-
-    if (isFirstTimeLogin) {
-      // First-time login: go to 2FA setup
-      router.push("/two-step-verification")
-    } else {
-      // Regular login: go to 2FA code entry (if user has 2FA enabled)
-      // router.push("/enter-2fa-code") // We'll need to create this screen
-      // For now, let's go to dashboard
-      // router.push("/dashboard")
-      console.log("Would go to 2FA code entry or dashboard")
-    }
+  // Validate fields
+  const newErrors = {
+    username: validateUsername(formData.username),
+    password: validatePassword(formData.password),
+    rememberMe: validateRememberMe(formData.rememberMe),
   }
+
+  setErrors(newErrors)
+  const hasErrors = Object.values(newErrors).some((error) => error !== "")
+  if (hasErrors) return
+
+  const payload = {
+    email: formData.username, // using email here, not "username"
+    password: formData.password,
+  }
+
+  try {
+    const res = await axios.post("/auth/signin", payload)
+    const { access_token, refresh_token, device_id } = res.data
+
+    localStorage.setItem("access_token", access_token)
+    localStorage.setItem("refresh_token", refresh_token)
+    localStorage.setItem("device_id", device_id)
+
+    router.push("/home")
+  } catch (err) {
+    const message = err?.response?.data?.message || "Login failed. Please try again."
+    alert(message)
+    console.error(err)
+  }
+}
 
   const handleForgotPassword = () => {
     console.log("Forgot password clicked")
@@ -153,7 +152,7 @@ export default function SignIn() {
 
           {/* Username Field */}
           <div className="input-group">
-            <label className="input-label">Username or Full name</label>
+            <label className="input-label">Email</label>
             <input
               type="text"
               name="username"
