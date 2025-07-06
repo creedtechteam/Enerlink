@@ -42,7 +42,7 @@ export class AuthService {
       user.id,
     );
 
-    return { message: 'Check your email for a verification code', access_token: access, refresh_token: refresh, device_id  };
+    return { message: 'Check your email for a verification code', access_token: access, refresh_token: refresh, device_id, user_id: user.id  };
   }
 
   async addWalletAddress(user_id: string, address: string) {
