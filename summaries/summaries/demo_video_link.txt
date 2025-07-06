@@ -1,0 +1,11 @@
+Demo Video: [Link coming soon – final edit in progress]
+
+Expected Upload Platform: YouTube
+
+Project Walkthrough:
+- Wallet connection
+- ISP signal check simulation
+- Smart contract payment (Solana Devnet)
+- UI demo hosted via IPFS (enerlinklab.eth)
+
+Duration: ~3 minutes
