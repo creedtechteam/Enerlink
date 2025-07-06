@@ -74,7 +74,7 @@ Contract deployment and backend setup instructions will be added once Solana tes
 
 ## Repositories
 
-1.Frontend →
+1.Frontend → https://github.com/creedtechteam/Enerlink/tree/a58d73e0875061628df6b2156c16f3e57ae11e2c/enerlink-frontend
 
 2.Backend →
 
