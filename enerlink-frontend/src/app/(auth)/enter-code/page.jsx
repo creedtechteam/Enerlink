@@ -6,8 +6,9 @@ import { useRouter } from "next/navigation"
 import { useSearchParams } from "next/navigation"
 import "../../styles/enter-code.css"
 import axios from "@/lib/axios"
+import { Suspense } from "react"
 
-export default function EnterVerificationCode() {
+function EnterVerificationCode() {
   const [verificationCode, setVerificationCode] = useState("")
   const [userEmail, setUserEmail] = useState("")
   const [errors, setErrors] = useState({
@@ -159,5 +160,13 @@ export default function EnterVerificationCode() {
         </form>
       </div>
     </div>
+  )
+}
+
+export default function EnterCodePage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <EnterVerificationCode />
+    </Suspense>
   )
 }

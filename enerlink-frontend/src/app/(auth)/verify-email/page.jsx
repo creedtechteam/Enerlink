@@ -5,8 +5,9 @@ import Image from "next/image"
 import { useState, useEffect } from "react"
 import { useSearchParams } from "next/navigation"
 import "../../styles/verify-email.css"
+import { Suspense } from "react"
 
-export default function VerifyEmail() {
+function VerifyEmail() {
   const [userEmail, setUserEmail] = useState("")
   const searchParams = useSearchParams()
 
@@ -81,5 +82,13 @@ export default function VerifyEmail() {
         </div>
       </div>
     </div>
+  )
+}
+
+export default function EmailVerificationPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <VerifyEmail />
+    </Suspense>
   )
 }
