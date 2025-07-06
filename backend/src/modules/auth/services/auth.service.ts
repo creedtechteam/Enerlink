@@ -37,8 +37,12 @@ export class AuthService {
 
     const token = await this.otpService.generate(user.id);
     this.events.emit('user.created', { user, otp: { token } });
+    const access = await this.accessTokenService.generate(user);
+    const { token: refresh, device_id } = await this.refreshTokenService.create(
+      user.id,
+    );
 
-    return { message: 'Check your email for a verification code' };
+    return { message: 'Check your email for a verification code', access_token: access, refresh_token: refresh, device_id  };
   }
 
   async addWalletAddress(user_id: string, address: string) {
