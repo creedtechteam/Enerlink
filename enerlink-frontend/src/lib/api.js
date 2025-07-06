@@ -1,7 +1,7 @@
 // API functions for backend integration
 // These use mock data for now - replace with real API calls when backend is ready
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "https://enerlink-api.onrender.com/api"
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "https://enerlink.onrender.com"
 
 // Mock delay to simulate real API calls
 const mockDelay = (ms = 1000) => new Promise((resolve) => setTimeout(resolve, ms))
